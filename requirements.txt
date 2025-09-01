@@ -1,0 +1,13 @@
+pandas
+numpy
+plotly
+taipy
+openpyxl
+
+snowflake-connector-python
+snowflake-sqlalchemy
+sqlalchemy
+
+python-dotenv
+requests
+jupyterlab
