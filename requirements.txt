@@ -1,13 +1,19 @@
+# Data handling
 pandas
 numpy
-plotly
-taipy
 openpyxl
+requests
+python-dotenv
+
+plotly
+streamlit
+taipy
 
 snowflake-connector-python
 snowflake-sqlalchemy
 sqlalchemy
 
-python-dotenv
-requests
+dbt-core
+dbt-snowflake
+
 jupyterlab
