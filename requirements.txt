@@ -1,3 +1,4 @@
+
 agate==1.9.1
 alembic==1.16.5
 altair==5.5.0
@@ -179,3 +180,23 @@ wcwidth==0.2.13
 websockets==15.0.1
 yarl==1.20.1
 zipp==3.23.0
+# Data handling
+pandas
+numpy
+openpyxl
+requests
+python-dotenv
+
+plotly
+streamlit
+taipy
+
+snowflake-connector-python
+snowflake-sqlalchemy
+sqlalchemy
+
+dbt-core
+dbt-snowflake
+
+jupyterlab
+
