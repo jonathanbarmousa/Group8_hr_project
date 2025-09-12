@@ -1,16 +1,20 @@
 USE ROLE SYSADMIN;
 
--- Warehouse (compute resources)
-CREATE WAREHOUSE group_wh
+CREATE WAREHOUSE IF NOT EXISTS job_analysis_wh
 WITH
-  WAREHOUSE_SIZE = 'XSMALL'
-  AUTO_SUSPEND = 60
-  AUTO_RESUME = TRUE
-  INITIALLY_SUSPENDED = TRUE
-  COMMENT = 'Warehouse for group project.';
+WAREHOUSE_SIZE = 'XSMALL'
+AUTO_SUSPEND = 60
+AUTO_RESUME = TRUE
+INITIALLY_SUSPENDED = TRUE
+COMMENT = "Warehouse for analizing data from Jobtech API";
 
-  -- Database
-CREATE DATABASE project_HR;
+USE WAREHOUSE job_analysis_wh;
+CREATE DATABASE IF NOT EXISTS Jobtech_analysis;
 
--- Schemas
-CREATE SCHEMA project_HR.staging;
+CREATE SCHEMA IF NOT EXISTS staging;
+CREATE SCHEMA IF NOT EXISTS warehouse;
+CREATE SCHEMA IF NOT EXISTS mart;
+
+DESC DATABASE jobtech_analysis;
+
+SHOW DATABASES;

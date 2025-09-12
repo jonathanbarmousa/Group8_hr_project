@@ -1,72 +1,91 @@
--- Byt till rätt roll för att skapa andra roller
 USE ROLE USERADMIN;
-SELECT CURRENT_USER;
-
--- Skapa roller om de inte finns
-CREATE ROLE IF NOT EXISTS dlt_dev_role;
-CREATE ROLE IF NOT EXISTS dlt_readonly_role;
-
--- Byt till en lämplig roll för att ge privilegier till roller och tilldela roller till användare
-USE ROLE SECURITYADMIN;
-
-CREATE USER IF NOT EXISTS jonathan_user PASSWORD = '123';
-CREATE USER IF NOT EXISTS abbefahmi_user PASSWORD = '1234';
-CREATE USER IF NOT EXISTS abbeazeez_user PASSWORD = '12345';
 
 
--- Tilldela roller till användare
-GRANT ROLE dlt_dev_role TO USER jonathan_user;
-GRANT ROLE dlt_dev_role TO USER abbefahmi_user;
-GRANT ROLE dlt_dev_role TO USER abbeazeez_user;
+CREATE ROLE IF NOT EXISTS jobtech_team_role;
 
--- Ge åtkomst till warehouse, databas och schema för dlt_dev_role
-GRANT USAGE ON WAREHOUSE group_wh TO ROLE dlt_dev_role;
-GRANT USAGE ON DATABASE project_HR TO ROLE dlt_dev_role;
-GRANT USAGE ON SCHEMA project_HR.staging TO ROLE dlt_dev_role;
+CREATE ROLE IF NOT EXISTS jobtech_dlt_role;      
+CREATE ROLE IF NOT EXISTS jobtech_dbt_role;      
+CREATE ROLE IF NOT EXISTS jobtech_streamlit_role; 
 
--- Byt till ACCOUNTADMIN för att ge ACCOUNTADMIN-rollen till användare
-USE ROLE ACCOUNTADMIN;
 
--- Ge ACCOUNTADMIN-rollen till användare
-GRANT ROLE ACCOUNTADMIN TO USER jonathan_user;
-GRANT ROLE ACCOUNTADMIN TO USER abbefahmi_user;
+GRANT USAGE ON WAREHOUSE job_analysis_wh TO ROLE jobtech_team_role;
+GRANT OPERATE ON WAREHOUSE job_analysis_wh TO ROLE jobtech_team_role;
+GRANT MONITOR ON WAREHOUSE job_analysis_wh TO ROLE jobtech_team_role;
 
--- Återgå till SECURITYADMIN för att ge åtkomst till warehouse, databas och schema
-USE ROLE SECURITYADMIN;
+GRANT USAGE ON DATABASE Jobtech_analysis TO ROLE jobtech_team_role;
+GRANT CREATE SCHEMA ON DATABASE Jobtech_analysis TO ROLE jobtech_team_role;
 
--- ======================================
--- 1️⃣ Warehouse access
--- ======================================
-GRANT USAGE ON WAREHOUSE group_wh TO ROLE dlt_dev_role;
-GRANT USAGE ON WAREHOUSE group_wh TO ROLE dlt_readonly_role;
 
--- ======================================
--- 2️⃣ Database access
--- ======================================
-GRANT USAGE ON DATABASE project_HR TO ROLE dlt_dev_role;
-GRANT USAGE ON DATABASE project_HR TO ROLE dlt_readonly_role;
 
--- ======================================
--- 3️⃣ Schema access
--- ======================================
-GRANT USAGE ON SCHEMA project_HR.staging TO ROLE dlt_dev_role;
-GRANT USAGE ON SCHEMA project_HR.staging TO ROLE dlt_readonly_role;
+GRANT ALL ON SCHEMA Jobtech_analysis.staging TO ROLE jobtech_team_role;
+GRANT ALL ON SCHEMA Jobtech_analysis.warehouse TO ROLE jobtech_team_role;
+GRANT ALL ON SCHEMA Jobtech_analysis.mart TO ROLE jobtech_team_role;
+GRANT ALL ON SCHEMA Jobtech_analysis.public TO ROLE jobtech_team_role;
 
--- Ge dlt_dev_role rätt att skapa tabeller i schema
-GRANT CREATE TABLE ON SCHEMA project_HR.staging TO ROLE dlt_dev_role;
 
--- ======================================
--- 4️⃣ Table privileges
--- ======================================
--- Dev role → full CRUD
-GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA project_HR.staging TO ROLE dlt_dev_role;
-GRANT SELECT, INSERT, UPDATE, DELETE ON FUTURE TABLES IN SCHEMA project_HR.staging TO ROLE dlt_dev_role;
+GRANT ALL ON ALL TABLES IN DATABASE Jobtech_analysis TO ROLE jobtech_team_role;
 
--- Readonly role → read-only
-GRANT SELECT ON ALL TABLES IN SCHEMA project_HR.staging TO ROLE dlt_readonly_role;
-GRANT SELECT ON FUTURE TABLES IN SCHEMA project_HR.staging TO ROLE dlt_readonly_role;
-GRANT SELECT ON FUTURE TABLES IN DATABASE project_HR TO ROLE dlt_readonly_role;
 
--- Visa de aktuella behörigheterna för varje roll
-SHOW GRANTS TO ROLE dlt_readonly_role;
-SHOW GRANTS TO ROLE dlt_dev_role;
+GRANT ALL ON FUTURE TABLES IN DATABASE Jobtech_analysis TO ROLE jobtech_team_role;
+
+
+GRANT USAGE ON WAREHOUSE job_analysis_wh TO ROLE jobtech_dlt_role;
+GRANT USAGE ON DATABASE Jobtech_analysis TO ROLE jobtech_dlt_role;
+GRANT CREATE SCHEMA ON DATABASE Jobtech_analysis TO ROLE jobtech_dlt_role;
+GRANT ALL ON SCHEMA Jobtech_analysis.staging TO ROLE jobtech_dlt_role;
+GRANT ALL ON FUTURE TABLES IN SCHEMA Jobtech_analysis.staging TO ROLE jobtech_dlt_role;
+
+
+GRANT USAGE ON WAREHOUSE job_analysis_wh TO ROLE jobtech_dbt_role;
+GRANT USAGE ON DATABASE Jobtech_analysis TO ROLE jobtech_dbt_role;
+GRANT USAGE ON SCHEMA Jobtech_analysis.staging TO ROLE jobtech_dbt_role;
+GRANT SELECT ON ALL TABLES IN SCHEMA Jobtech_analysis.staging TO ROLE jobtech_dbt_role;
+GRANT SELECT ON FUTURE TABLES IN SCHEMA Jobtech_analysis.staging TO ROLE jobtech_dbt_role;
+GRANT ALL ON SCHEMA Jobtech_analysis.warehouse TO ROLE jobtech_dbt_role;
+GRANT ALL ON SCHEMA Jobtech_analysis.mart TO ROLE jobtech_dbt_role;
+GRANT ALL ON FUTURE TABLES IN SCHEMA Jobtech_analysis.warehouse TO ROLE jobtech_dbt_role;
+GRANT ALL ON FUTURE VIEWS IN SCHEMA Jobtech_analysis.warehouse TO ROLE jobtech_dbt_role;
+GRANT ALL ON FUTURE TABLES IN SCHEMA Jobtech_analysis.mart TO ROLE jobtech_dbt_role;
+GRANT ALL ON FUTURE VIEWS IN SCHEMA Jobtech_analysis.mart TO ROLE jobtech_dbt_role;
+GRANT CREATE SCHEMA ON DATABASE Jobtech_analysis TO ROLE jobtech_dbt_role;
+
+
+GRANT USAGE ON WAREHOUSE job_analysis_wh TO ROLE jobtech_streamlit_role;
+GRANT USAGE ON DATABASE Jobtech_analysis TO ROLE jobtech_streamlit_role;
+GRANT USAGE ON SCHEMA Jobtech_analysis.mart TO ROLE jobtech_streamlit_role;
+GRANT SELECT ON ALL TABLES IN SCHEMA Jobtech_analysis.mart TO ROLE jobtech_streamlit_role;
+GRANT SELECT ON ALL VIEWS IN SCHEMA Jobtech_analysis.mart TO ROLE jobtech_streamlit_role;
+GRANT SELECT ON FUTURE TABLES IN SCHEMA Jobtech_analysis.mart TO ROLE jobtech_streamlit_role;
+GRANT SELECT ON FUTURE VIEWS IN SCHEMA Jobtech_analysis.mart TO ROLE jobtech_streamlit_role;
+
+
+
+
+GRANT ROLE jobtech_team_role TO USER JONATHANBARMOUSA;
+GRANT ROLE jobtech_team_role TO USER JONATHAN_USER;
+GRANT ROLE jobtech_team_role TO USER ABBEFAHMI_USER;
+GRANT ROLE jobtech_team_role TO USER ABBEAZEEZ_USER;
+GRANT ROLE jobtech_dlt_role TO USER DLT_role;
+GRANT ROLE jobtech_dbt_role TO USER DBT_role;
+GRANT ROLE jobtech_streamlit_role TO USER Streamlit_role;
+
+
+ALTER USER JONATHANBARMOUSA SET DEFAULT_ROLE = 'jobtech_team_role';
+ALTER USER JONATHAN_USER SET DEFAULT_ROLE = 'jobtech_team_role';
+ALTER USER ABBEFAHMI_USER SET DEFAULT_ROLE = 'jobtech_team_role';
+ALTER USER ABBEAZEEZ_USER SET DEFAULT_ROLE = 'jobtech_team_role';
+ALTER USER DLT_role SET DEFAULT_ROLE = 'jobtech_dlt_role';
+ALTER USER DBT_role SET DEFAULT_ROLE = 'jobtech_dbt_role';
+ALTER USER Streamlit_role SET DEFAULT_ROLE = 'jobtech_streamlit_role';
+
+
+
+USE ROLE SYSADMIN;
+USE DATABASE Jobtech_analysis;
+
+
+USE ROLE SYSADMIN;
+SHOW SCHEMAS IN DATABASE Jobtech_analysis;
+
+SHOW TABLES IN SCHEMA Jobtech_analysis.STAGING;
+
