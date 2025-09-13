@@ -22,4 +22,3 @@ CREATE USER IF NOT EXISTS Streamlit_role
     PASSWORD = "12345"
     DEFAULT_WAREHOUSE = job_analysis_wh;
 
-SHOW users;
