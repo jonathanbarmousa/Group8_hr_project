@@ -10,7 +10,7 @@ COMMENT = "Warehouse for analizing data from Jobtech API";
 
 USE WAREHOUSE job_analysis_wh;
 CREATE DATABASE IF NOT EXISTS Jobtech_analysis;
-
+USE DATABASE jobtech_analysis;
 CREATE SCHEMA IF NOT EXISTS staging;
 CREATE SCHEMA IF NOT EXISTS warehouse;
 CREATE SCHEMA IF NOT EXISTS mart;
