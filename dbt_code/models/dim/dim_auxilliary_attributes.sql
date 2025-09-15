@@ -7,3 +7,5 @@ select
     driving_license_required
 
 from src_auxilliary_attributes
+
+SHOW SCHEMAS;
