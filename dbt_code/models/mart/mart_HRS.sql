@@ -1,12 +1,14 @@
-with 
-    fct_table as (select * from {{ref('fct_table')}}),
-    dim_employer as (select * from {{ref('dim_employer')}}) ,
-    dim_auxilliary as (select * from {{ref('dim_auxilliary_attributes')}}),
-    dim_job_details as (select * from {{ref('dim_job_details')}}),
-    dim_occupation as (select * from {{ref('dim_occupation')}})
+USE DATABASE project_hr;
+USE SCHEMA staging;
 
+WITH 
+    fct_table AS (SELECT * FROM fct_job_ads),
+    dim_employer AS (SELECT * FROM dim_employer),
+    dim_auxiliary AS (SELECT * FROM dim_auxiliary_attributes),
+    dim_job_details AS (SELECT * FROM dim_job_details),
+    dim_occupation AS (SELECT * FROM dim_occupation)
 
-select
+SELECT
     do.occupation,
     do.occupation_field,
     do.occupation_group,
@@ -20,17 +22,14 @@ select
     da.driving_license_required,
     de.employer_name,
     de.employer_workplace,
-    de.workplace_street_address,
-    de.workplace_region,
     de.workplace_city,
-    de.workplace_postcode,
+    de.workplace_region,
     de.workplace_country,
     ft.vacancies,
     ft.application_deadline
-from
-    fct_table ft
-left join dim_employer de ON de.employer_id = ft.employer_id
-left join dim_auxilliary da ON da.auxilliary_attribute_id = ft.auxilliary_attribute_id
-left join dim_job_details dj ON dj.job_details_id = ft.job_details_id
-left join dim_occupation do ON do.occupation_id = ft.occupation_id
-where occupation_field = 'Hotell, restaurang, storhushåll'
+FROM fct_table ft
+LEFT JOIN dim_employer de ON de.employer_id = ft.employer_id
+LEFT JOIN dim_auxiliary da ON da.aux_attribute_id = ft.aux_attribute_id
+LEFT JOIN dim_job_details dj ON dj.job_details_id = ft.job_details_id
+LEFT JOIN dim_occupation do ON do.occupation = ft.occupation
+WHERE do.occupation_field = 'Hotell, restaurang, storhushåll';
