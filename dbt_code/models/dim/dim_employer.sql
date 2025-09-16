@@ -1,14 +1,13 @@
-th src_employer as (select * from {{ ref('src_employer') }})
+USE DATABASE project_hr;
+USE SCHEMA staging;
 
-select
-    {{ dbt_utils.generate_surrogate_key(['employer__organization_number']) }} as employer_id,
+DESC TABLE dim_employer;
 
+SELECT 
+    md5(coalesce(cast(employer_name as string), '')) as employer_id,
     employer_name,
     employer_workplace,
-    workplace_street_address,
-    workplace_region,
     workplace_city,
-    workplace_postcode,
+    workplace_region,
     workplace_country
-    
-from src_employer
+FROM dim_employer;

@@ -1,11 +1,10 @@
-with src_auxilliary_attributes as (select * from {{ ref('src_auxilliary_attributes') }})
-
-select
-    {{ dbt_utils.generate_surrogate_key(['experience_required', 'access_to_own_car', 'driving_license_required']) }} as auxilliary_attribute_id,
+SELECT
+    md5(
+        coalesce(cast(experience_required as string), '') || '-' ||
+        coalesce(cast(access_to_own_car as string), '') || '-' ||
+        coalesce(cast(driving_license_required as string), '')
+    ) as aux_attribute_id,
     experience_required,
     access_to_own_car,
     driving_license_required
-
-from src_auxilliary_attributes
-
-SHOW SCHEMAS;
+FROM project_hr.staging.dim_auxiliary_attributes;
