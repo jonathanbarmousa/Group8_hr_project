@@ -19,9 +19,6 @@ DESC DATABASE project_hr;
 
 
 
-
-
-
 USE DATABASE project_hr;
 USE SCHEMA staging;
 
