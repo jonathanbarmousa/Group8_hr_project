@@ -35,7 +35,13 @@ st.markdown("---")
 data = {
     "Stad": ["Stockholm", "Göteborg", "Malmö", "Uppsala", "Västerås"],
     "Antal annonser": [300, 150, 120, 80, 50],
-    "Yrkesområde": ["IT", "IT", "IT", "IT", "IT"]
+    "Yrkesområde": [
+        "Hotell, restaurang, storhushåll, Installation, drift, underhåll",
+        "Hotell, restaurang, storhushåll, Installation, drift, underhåll",
+        "Hotell, restaurang, storhushåll, Installation, drift, underhåll",
+        "Hotell, restaurang, storhushåll, Installation, drift, underhåll",
+        "Hotell, restaurang, storhushåll, Installation, drift, underhåll"
+    ]
 }
 df = pd.DataFrame(data)
 
