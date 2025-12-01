@@ -1,10 +1,10 @@
 import os
 from dotenv import load_dotenv
 import snowflake.connector
-import pandas as pd 
+import pandas as pd
 
- 
-def query_job_listings(query='SELECT * FROM mart_technical_jobs'):
+
+def get_job_list(query='SELECT * FROM JOBTECH_ANALYSIS.MARTS.MART_MAIN'):
 
     load_dotenv()
 
@@ -18,7 +18,6 @@ def query_job_listings(query='SELECT * FROM mart_technical_jobs'):
         role=os.getenv("SNOWFLAKE_ROLE"),
     ) as conn:
 
-        # Execute the query
         df = pd.read_sql(query, conn)
 
         return df
