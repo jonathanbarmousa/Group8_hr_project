@@ -4,15 +4,14 @@ import json
 from pathlib import Path
 import os
 
-
 def _get_ads(url_for_search, params):
     headers = {"accept": "application/json"}
     response = requests.get(url_for_search, headers=headers, params=params)
-    response.raise_for_status()  # check for http errors
+    response.raise_for_status() 
     return json.loads(response.content.decode("utf8"))
 
 
-@dlt.resource(write_disposition="append")
+@dlt.resource(write_disposition="merge", primary_key="ID")
 def jobsearch_resource(params):
     """
     params should include at least:
@@ -59,6 +58,7 @@ def run_pipeline(query, table_name, occupation_fields):
         )
         print(f"Occupation field: {occupation_field}")
         print(load_info)
+
 
 
 if __name__ == "__main__":
