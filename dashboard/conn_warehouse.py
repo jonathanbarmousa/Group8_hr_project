@@ -4,8 +4,7 @@ import snowflake.connector
 import pandas as pd
 
 
-def get_job_list(query='SELECT * FROM JOBTECH_ANALYSIS.MARTS.MART_MAIN'):
-
+def get_job_list(query='SELECT * FROM JOBTECH_ANALYSIS.MARTS_MARTS.MART_MAIN'):
     load_dotenv()
 
     with snowflake.connector.connect(
@@ -17,7 +16,7 @@ def get_job_list(query='SELECT * FROM JOBTECH_ANALYSIS.MARTS.MART_MAIN'):
         schema=os.getenv("SNOWFLAKE_SCHEMA"),
         role=os.getenv("SNOWFLAKE_ROLE"),
     ) as conn:
-
+       
         df = pd.read_sql(query, conn)
-
+       
         return df

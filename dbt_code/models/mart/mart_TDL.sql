@@ -1,9 +1,9 @@
-with 
-    fct_table as (select * from {{ref('fct_table')}}),
-    dim_employer as (select * from {{ref('dim_employer')}}) ,
-    dim_auxilliary as (select * from {{ref('dim_auxilliary_attributes')}}),
-    dim_job_details as (select * from {{ref('dim_job_details')}}),
-    dim_occupation as (select * from {{ref('dim_occupation')}})
+with
+    fct_table as (select * from {{ ref('fct_job_ads') }}),
+    dim_employer as (select * from {{ ref('dim_employer') }}),
+    dim_auxilliary as (select * from {{ ref('dim_auxilliary_attributes') }}),
+    dim_job_details as (select * from {{ ref('dim_job_details') }}),
+    dim_occupation as (select * from {{ ref('dim_occupation') }})
 
 
 select
@@ -33,4 +33,4 @@ left join dim_employer de ON de.employer_id = ft.employer_id
 left join dim_auxilliary da ON da.auxilliary_attribute_id = ft.auxilliary_attribute_id
 left join dim_job_details dj ON dj.job_details_id = ft.job_details_id
 left join dim_occupation do ON do.occupation_id = ft.occupation_id
-where occupation_field = 'Transport, distribution, lager';
+where do.occupation_field = 'Hotell, restaurang, storhushåll'

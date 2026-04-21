@@ -9,4 +9,4 @@ SELECT
     relevance,
     application_deadline
 FROM
-    stg_job_adss
+    stg_job_ads

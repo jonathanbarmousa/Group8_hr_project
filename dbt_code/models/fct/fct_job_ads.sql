@@ -8,7 +8,6 @@ select
     vacancies,
     relevance,
     application_deadline,
-    publication_date
 
 from
     fct_job_ads

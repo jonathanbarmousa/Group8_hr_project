@@ -11,22 +11,28 @@ def local_css(file_name):
 
 local_css("styles.css")
 
-chooser = ["Alla områden", "Hotell, Resturang, Storhushåll", "Installation, drift, underhåll", "Transport, distrubiton, lager"]
+chooser = [
+    "Alla områden",
+    "Hotell, Resturang, Storhushåll",
+    "Installation, drift, underhåll",
+    "Transport, distrubiton, lager"
+]
+
 mart_schema = {
-    "Alla områden": "mart_main", 
-    "Hotell, Resturang, Storhushåll": "mart_HRS",
-    "Installation, drift, underhåll": "mart_IDU",
-    "Transport, distrubiton, lager": "mart_TDL"
+    "Alla områden": "JOBTECH_ANALYSIS.MARTS_MARTS.MART_MAIN",
+    "Hotell, Resturang, Storhushåll": "JOBTECH_ANALYSIS.MARTS_MARTS.MART_HRS",
+    "Installation, drift, underhåll": "JOBTECH_ANALYSIS.MARTS_MARTS.MART_IDU",
+    "Transport, distrubiton, lager": "JOBTECH_ANALYSIS.MARTS_MARTS.MART_TDL"
 }
 
 def dashboard_page():
     st.set_page_config(page_title="Jobtech_Analysis", layout="wide")
 
-    # Sidebar
+  
     with st.sidebar:
         st.markdown('<div class="logo-container">', unsafe_allow_html=True)
         st.markdown("""
-        <div style='text-align: center; padding: 20px; background: linear-gradient(135deg, #1f1c2c 0%, #928dab 100%); 
+        <div style='text-align: center; padding: 20px; background: linear-gradient(135deg, #1f1c2c 0%, #928dab 100%);
                     border-radius: 10px; color: white; margin-bottom: 20px;'>
             <h2>📊 Analytics</h2>
             <p style='margin: 0; opacity: 0.8;'>Dashboard</p>
@@ -42,12 +48,12 @@ def dashboard_page():
 
     st.markdown('<h1 class="dashboard-title">📊 Employment Analytics Dashboard</h1>', unsafe_allow_html=True)
 
-    # KPI Cards
+    
     df = get_job_list(query=f"SELECT * FROM {mart_schema[option]}")
     total_vacancies = len(df)
-    today_vacancies = df[df['PUBLICATION_DATE'] == df['PUBLICATION_DATE'].max()].shape[0] if "PUBLICATION_DATE" in df else 0
-    exp_required = df[df['EXPERIENCE_REQUIRED'].isin([True, 1])].shape[0]
-    license_required = df[df['DRIVING_LICENSE_REQUIRED'].isin([True, 1])].shape[0]
+    today_vacancies = 0
+    exp_required = df[df['EXPERIENCE_REQUIRED'].isin([True, 1])].shape[0] if "EXPERIENCE_REQUIRED" in df.columns else 0
+    license_required = df[df['DRIVING_LICENSE_REQUIRED'].isin([True, 1])].shape[0] if "DRIVING_LICENSE_REQUIRED" in df.columns else 0
 
     kpi1, kpi2, kpi3, kpi4 = st.columns(4)
     kpi1.metric("Total Vacancies", f"{total_vacancies:,}")
@@ -57,7 +63,7 @@ def dashboard_page():
 
     st.write("---")
 
-    # Charts
+    
     col1, col2 = st.columns(2, gap="large")
     with col1:
         st.markdown('<div class="card-title">💼 Top 10 Occupations</div>', unsafe_allow_html=True)
