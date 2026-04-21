@@ -1,6 +1,9 @@
-📊 Jobtech Analytics Dashboard
+# 📊 Jobtech Analytics Dashboard
+
 Ett komplett data pipeline- och visualiseringsprojekt som analyserar jobbannonser från Jobtech API. Projektet bygger en modern data stack med DLT, Snowflake, dbt och Streamlit för att extrahera, transformera och visualisera arbetsmarknadsdata.
-🚀 Översikt
+
+# 🚀 Översikt
+
 Projektet består av fyra huvuddelar:
 Data ingestion (DLT)
 Hämtar jobbannonser från Jobtech API och laddar dem till Snowflake.
@@ -10,7 +13,9 @@ Transformation (dbt)
 Bygger dimensioner och faktatabeller samt färdiga analysmodeller.
 Dashboard (Streamlit)
 Visualiserar data i ett interaktivt gränssnitt.
-🏗️ Arkitektur
+
+# 🏗️ Arkitektur
+
 Jobtech API
      ↓
    DLT 
@@ -20,7 +25,8 @@ Jobtech API
    dbt 
      ↓
 Streamlit Dashboard
-🗂️ Projektstruktur
+
+🗂️ Mapp struktur
 
 │
 ├── dlt/
@@ -41,16 +47,21 @@ Streamlit Dashboard
 │
 ├── .env                         # Credentials (ej commit)
 └── README.md
-⚙️ Installation
+# ⚙️ Installation
+
 1. Klona projektet
 git clone <repo-url>
-cd Group8_hr_project
+
+
 2. Skapa virtual environment
 python -m venv .venv
 source .venv/bin/activate
+
 3. Installera dependencies
 pip install -r requirements.txt
-🔐 Miljövariabler
+
+# 🔐 Miljövariabler
+
 Skapa en .env-fil:
 SNOWFLAKE_USER=your_user
 SNOWFLAKE_PASSWORD=your_password
@@ -59,12 +70,15 @@ SNOWFLAKE_WAREHOUSE=JOB_ANALYSIS_WH
 SNOWFLAKE_DATABASE=JOBTECH_ANALYSIS
 SNOWFLAKE_SCHEMA=MARTS_MARTS
 SNOWFLAKE_ROLE=JOBTECH_STREAMLIT_ROLE
-📥 Steg 1 – Ladda data (DLT)
+# 📥 Steg 1 – Ladda data (DLT)
+
 cd dlt
 python load_job_ads.py
 Data laddas till:
 JOBTECH_ANALYSIS.STAGING.JOB_ADS
-🔄 Steg 2 – Bygg datamodell (dbt)
+
+# 🔄 Steg 2 – Bygg datamodell (dbt)
+
 cd dbt_code
 dbt run
 Detta skapar:
@@ -81,23 +95,35 @@ mart_IDU
 mart_TDL
 Schema:
 JOBTECH_ANALYSIS.MARTS_MARTS
-📊 Steg 3 – Starta dashboard
+
+# 📊 Steg 3 – Starta dashboard
+
 cd dashboard
 streamlit run dashboard.py
-📈 Funktioner
+
+# 📈 Funktioner
 Dashboard innehåller:
-📊 KPI:er
+
+# 📊 KPI:er
+
 Totala jobb
 Erfarenhetskrav
 Körkortskrav
-💼 Top occupations
-🏢 Top employers
-🗺️ Geografisk visualisering
-📊 Filter per yrkesområde:
+
+# 💼 Top occupations
+
+# 🏢 Top employers
+
+# 🗺️ Geografisk visualisering
+
+# 📊 Filter per yrkesområde:
+
 Hotell & restaurang
 Installation & drift
 Transport & logistik
-🧠 Teknologier
+
+# 🧠 Teknologier
+
 Python
 DLT (Data Load Tool)
 Snowflake
