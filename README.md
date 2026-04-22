@@ -63,51 +63,81 @@ pip install -r requirements.txt
 # 🔐 Miljövariabler
 
 Skapa en .env-fil:
+
 SNOWFLAKE_USER=your_user
+
 SNOWFLAKE_PASSWORD=your_password
+
 SNOWFLAKE_ACCOUNT=your_account
+
 SNOWFLAKE_WAREHOUSE=JOB_ANALYSIS_WH
+
 SNOWFLAKE_DATABASE=JOBTECH_ANALYSIS
+
 SNOWFLAKE_SCHEMA=MARTS_MARTS
+
 SNOWFLAKE_ROLE=JOBTECH_STREAMLIT_ROLE
+
 # 📥 Steg 1 – Ladda data (DLT)
 
 cd dlt
+
 python load_job_ads.py
+
 Data laddas till:
+
 JOBTECH_ANALYSIS.STAGING.JOB_ADS
 
 # 🔄 Steg 2 – Bygg datamodell (dbt)
 
 cd dbt_code
+
 dbt run
+
 Detta skapar:
+
 Warehouse:
+
 dim_employer
+
 dim_job_details
+
 dim_occupation
+
 dim_auxilliary_attributes
+
 fct_job_ads
+
 Marts:
+
 mart_main
+
 mart_HRS
+
 mart_IDU
+
 mart_TDL
+
 Schema:
+
 JOBTECH_ANALYSIS.MARTS_MARTS
 
 # 📊 Steg 3 – Starta dashboard
 
 cd dashboard
+
 streamlit run dashboard.py
 
 # 📈 Funktioner
+
 Dashboard innehåller:
 
 # 📊 KPI:er
 
 Totala jobb
+
 Erfarenhetskrav
+
 Körkortskrav
 
 # 💼 Top occupations
@@ -118,15 +148,21 @@ Körkortskrav
 
 # 📊 Filter per yrkesområde:
 
+
 Hotell & restaurang
+
 Installation & drift
+
 Transport & logistik
 
 # 🧠 Teknologier
 
 Python
+
 DLT (Data Load Tool)
+
 Snowflake
+
 dbt (Data Build Tool)
 Streamlit
 
