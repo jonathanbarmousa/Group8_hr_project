@@ -99,3 +99,12 @@ pip install -r requirements.txt
 ├── secrets.toml          # (local only) Snowflake creds for DLT
 └── .env                  # (local only) Snowflake creds for dbt + Streamlit
 ```
+
+---
+
+** ✅ Notes
+
+- Kör stegen **i rätt ordning**: **DLT → dbt → Streamlit**
+- Skydda dina credentials (`.env` och `secrets.toml` måste finnas i `.gitignore`)
+- Uppdatera Snowflake-inställningar innan körning
+
