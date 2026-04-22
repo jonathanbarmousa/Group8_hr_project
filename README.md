@@ -88,7 +88,7 @@ pip install -r requirements.txt
 
 ---
 
-** 📂 Projektstruktur
+## 📂 Projektstruktur
 
 ```
 .
