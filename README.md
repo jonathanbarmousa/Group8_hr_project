@@ -26,58 +26,14 @@ Visualiserar data i ett interaktivt gränssnitt.
 
 Jobtech API
     ↓
-     
    DLT
     ↓
-     
- Snowflake
+Snowflake
     ↓
-     
-   dbt
+   DBT
     ↓
      
 Streamlit Dashboard
-
-🗂️ Mapp struktur
-
-
-│
-
-├── dlt/
-
-│   └── load_job_ads.py          # Data ingestion via Jobtech API
-
-│
-
-├── dbt_code/
-
-│   ├── models/
-
-│   │   ├── src/                 # Source models
-
-│   │   ├── fct/                 # Faktatabeller
-
-│   │   ├── dim/                 # Dimensioner
-
-│   │   └── mart/                # Analyslager
-
-│   └── dbt_project.yml
-
-│
-
-├── dashboard/
-
-│   ├── dashboard.py             # Streamlit app
-
-│   ├── conn_warehouse.py        # Snowflake connection
-
-│   └── components/              # Visualiseringar
-
-│
-
-├── .env                         # Credentials (ej commit)
-
-└── README.md
 
 # ⚙️ Installation
 
