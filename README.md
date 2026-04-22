@@ -5,48 +5,83 @@ Ett komplett data pipeline- och visualiseringsprojekt som analyserar jobbannonse
 # 🚀 Översikt
 
 Projektet består av fyra huvuddelar:
+
 Data ingestion (DLT)
+
 Hämtar jobbannonser från Jobtech API och laddar dem till Snowflake.
+
 Data warehouse (Snowflake)
+
 Lagrar rådata (staging) och transformerad data (warehouse + marts).
+
 Transformation (dbt)
+
 Bygger dimensioner och faktatabeller samt färdiga analysmodeller.
+
 Dashboard (Streamlit)
+
 Visualiserar data i ett interaktivt gränssnitt.
 
 # 🏗️ Arkitektur
 
 Jobtech API
      ↓
-   DLT 
+     
+   DLT
+   
      ↓
+     
  Snowflake
+ 
      ↓
-   dbt 
+     
+   dbt
+   
      ↓
+     
 Streamlit Dashboard
 
 🗂️ Mapp struktur
 
+
 │
+
 ├── dlt/
+
 │   └── load_job_ads.py          # Data ingestion via Jobtech API
+
 │
+
 ├── dbt_code/
+
 │   ├── models/
+
 │   │   ├── src/                 # Source models
+
 │   │   ├── fct/                 # Faktatabeller
+
 │   │   ├── dim/                 # Dimensioner
+
 │   │   └── mart/                # Analyslager
+
 │   └── dbt_project.yml
+
 │
+
 ├── dashboard/
+
 │   ├── dashboard.py             # Streamlit app
+
 │   ├── conn_warehouse.py        # Snowflake connection
+
 │   └── components/              # Visualiseringar
+
 │
+
 ├── .env                         # Credentials (ej commit)
+
 └── README.md
+
 # ⚙️ Installation
 
 1. Klona projektet
