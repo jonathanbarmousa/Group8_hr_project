@@ -2,9 +2,9 @@
 
 Detta projekt demonstrerar en end-to-end datapipeline och analysflöde för HR-data med hjälp av:
 
-- **DLT (Data Load Tool) för datahämtning
-- **dbt för transformationer
-- **Streamlit för visualisering
+- **DLT (Data Load Tool)** för datahämtning
+- **dbt** för transformationer
+- **Streamlit** för visualisering
 
 ---
 
