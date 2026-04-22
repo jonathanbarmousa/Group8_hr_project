@@ -81,7 +81,7 @@ pip install -r requirements.txt
    dbt run
    ```
 
-3. **Kör streamlit **
+3. **Kör streamlit**
    ```bash
    streamlit run dashboard.py
    ```
@@ -102,7 +102,7 @@ pip install -r requirements.txt
 
 ---
 
-** ✅ Notes
+## ✅ Notes
 
 - Kör stegen **i rätt ordning**: **DLT → dbt → Streamlit**
 - Skydda dina credentials (`.env` och `secrets.toml` måste finnas i `.gitignore`)
