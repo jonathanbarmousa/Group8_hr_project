@@ -53,7 +53,7 @@ SNOWFLAKE_SCHEMA="<YOUR_SCHEMA>"
 SNOWFLAKE_ROLE="<YOUR_ROLE>"
 ```
 
-⚠️ **Lägg inte upp dessa filer på GitHub. Lägg till dem i .gitignore.
+⚠️ **Lägg inte upp dessa filer på GitHub.** Lägg till dem i .gitignore.
 
 ---
 
