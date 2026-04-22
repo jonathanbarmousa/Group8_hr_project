@@ -25,19 +25,16 @@ Visualiserar data i ett interaktivt gränssnitt.
 # 🏗️ Arkitektur
 
 Jobtech API
-     ↓
+    ↓
      
    DLT
-   
-     ↓
+    ↓
      
  Snowflake
- 
-     ↓
+    ↓
      
    dbt
-   
-     ↓
+    ↓
      
 Streamlit Dashboard
 
