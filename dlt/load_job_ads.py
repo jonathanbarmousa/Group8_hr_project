@@ -69,6 +69,6 @@ if __name__ == "__main__":
     table_name = "job_ads"
 
     # Hotell, Resturang, Storhushåll #Installation, drift, underhåll, #Transport, distrubiton, lager
-    occupation_fields = ("ScKy_FHB_7wT", "yhCP_AqT_tns", "yhCP_AqT_tns")
+    occupation_fields = ("ScKy_FHB_7wT", "yhCP_AqT_tns", "ASGV_zcE_bWf")
 
     run_pipeline(query, table_name, occupation_fields)
