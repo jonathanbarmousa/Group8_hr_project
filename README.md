@@ -1,156 +1,101 @@
-# 📊 Jobtech Analytics Dashboard
+# HR Analytics Proof of Concept
 
-Ett komplett data pipeline- och visualiseringsprojekt som analyserar jobbannonser från Jobtech API. Projektet bygger en modern data stack med DLT, Snowflake, dbt och Streamlit för att extrahera, transformera och visualisera arbetsmarknadsdata.
+Detta projekt demonstrerar en end-to-end datapipeline och analysflöde för HR-data med hjälp av:
 
-# 🚀 Översikt
+- **DLT (Data Load Tool) för datahämtning
+- **dbt för transformationer
+- **Streamlit för visualisering
 
-Projektet består av fyra huvuddelar:
+---
 
-Data ingestion (DLT)
+## 🚀 Arbetsflöde
 
-Hämtar jobbannonser från Jobtech API och laddar dem till Snowflake.
+1. **Kör DLT-pipelinen**
+    Laddar in rådata till Snowflake.
 
-Data warehouse (Snowflake)
+2. **Kör dbt-modeller**
+    Transformerar rådata till analysfärdiga tabeller.
 
-Lagrar rådata (staging) och transformerad data (warehouse + marts).
+3. **Starta Streamlit-dashboard**
+    Visualiserar resultatet.
 
-Transformation (dbt)
+---
 
-Bygger dimensioner och faktatabeller samt färdiga analysmodeller.
+## 🔑 Konfiguration
 
-Dashboard (Streamlit)
+Du behöver två konfigurationsfiler för att ansluta till Snowflake.
 
-Visualiserar data i ett interaktivt gränssnitt.
+### 1. `secrets.toml` (för DLT)
+Skapa en fil med namnet `secrets.toml` i din DLT-mapp:
 
-# 🏗️ Arkitektur
+```toml
+[destination.snowflake.credentials]
+database = "<YOUR_DATABASE>"
+username = "<YOUR_USERNAME>"
+password = "<YOUR_PASSWORD>"
+host = "<YOUR_ACCOUNT>"
+warehouse = "<YOUR_WAREHOUSE>"
+role = "<YOUR_ROLE>"
+```
 
-Jobtech API
-    ↓
-   DLT
-    ↓
-Snowflake
-    ↓
-   DBT
-    ↓
-     
-Streamlit Dashboard
+---
 
-# ⚙️ Installation
+### 2. `.env` (för dbt + Streamlit)
+Skapa en `.env` fil i projektets rotmapp:
 
-1. Klona projektet
-git clone <repo-url>
+```env
+SNOWFLAKE_USER="<YOUR_USERNAME>"
+SNOWFLAKE_PASSWORD="<YOUR_PASSWORD>"
+SNOWFLAKE_ACCOUNT="<YOUR_ACCOUNT>"
+SNOWFLAKE_WAREHOUSE="<YOUR_WAREHOUSE>"
+SNOWFLAKE_DATABASE="<YOUR_DATABASE>"
+SNOWFLAKE_SCHEMA="<YOUR_SCHEMA>"
+SNOWFLAKE_ROLE="<YOUR_ROLE>"
+```
 
+⚠️ **Lägg inte upp dessa filer på GitHub. Lägg till dem i .gitignore.
 
-2. Skapa virtual environment
-python -m venv .venv
-source .venv/bin/activate
+---
 
-3. Installera dependencies
+## ⚙️ Installation
+
+Klona projektet och installera beroenden:
+
+```bash
+git clone https://github.com/IrinaAntipina/hr-analytics-proof-of-concept.git
+cd hr-analytics-proof-of-concept
 pip install -r requirements.txt
+```
 
-# 🔐 Miljövariabler
+---
 
-Skapa en .env-fil:
+## ▶️ Hur man kör
 
-SNOWFLAKE_USER=your_user
+1. **Kör DLT-pipelinen**
+    ```bash
+   python dlt_pipeline.py
+   ```
 
-SNOWFLAKE_PASSWORD=your_password
+2. **Kör dbt transformation**
+    ```bash
+   dbt run
+   ```
 
-SNOWFLAKE_ACCOUNT=your_account
+3. **Kör streamlit **
+   ```bash
+   streamlit run dashboard.py
+   ```
 
-SNOWFLAKE_WAREHOUSE=JOB_ANALYSIS_WH
+---
 
-SNOWFLAKE_DATABASE=JOBTECH_ANALYSIS
+** 📂 Projektstruktur
 
-SNOWFLAKE_SCHEMA=MARTS_MARTS
-
-SNOWFLAKE_ROLE=JOBTECH_STREAMLIT_ROLE
-
-# 📥 Steg 1 – Ladda data (DLT)
-
-cd dlt
-
-python load_job_ads.py
-
-Data laddas till:
-
-JOBTECH_ANALYSIS.STAGING.JOB_ADS
-
-# 🔄 Steg 2 – Bygg datamodell (dbt)
-
-cd dbt_code
-
-dbt run
-
-Detta skapar:
-
-Warehouse:
-
-dim_employer
-
-dim_job_details
-
-dim_occupation
-
-dim_auxilliary_attributes
-
-fct_job_ads
-
-Marts:
-
-mart_main
-
-mart_HRS
-
-mart_IDU
-
-mart_TDL
-
-Schema:
-
-JOBTECH_ANALYSIS.MARTS_MARTS
-
-# 📊 Steg 3 – Starta dashboard
-
-cd dashboard
-
-streamlit run dashboard.py
-
-# 📈 Funktioner
-
-Dashboard innehåller:
-
-# 📊 KPI:er
-
-Totala jobb
-
-Erfarenhetskrav
-
-Körkortskrav
-
-# 💼 Top occupations
-
-# 🏢 Top employers
-
-# 🗺️ Geografisk visualisering
-
-# 📊 Filter per yrkesområde:
-
-
-Hotell & restaurang
-
-Installation & drift
-
-Transport & logistik
-
-# 🧠 Teknologier
-
-Python
-
-DLT (Data Load Tool)
-
-Snowflake
-
-dbt (Data Build Tool)
-Streamlit
-
+```
+.
+├── dlt_pipeline.py       # Data ingestion into Snowflake
+├── dbt_project/          # dbt models and configs
+├── dashboard.py          # Streamlit dashboard
+├── requirements.txt      # Python dependencies
+├── secrets.toml          # (local only) Snowflake creds for DLT
+└── .env                  # (local only) Snowflake creds for dbt + Streamlit
+```
