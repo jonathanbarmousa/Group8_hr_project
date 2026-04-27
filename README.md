@@ -1,4 +1,4 @@
-# HR Analytics Proof of Concept
+# HR Analytics dashboard
 
 Detta projekt demonstrerar en end-to-end datapipeline och analysflöde för HR-data med hjälp av:
 
