@@ -73,7 +73,7 @@ pip install -r requirements.txt
 
 1. **Kör DLT-pipelinen**
     ```bash
-   python dlt_pipeline.py
+   python load_job_ads.py
    ```
 
 2. **Kör dbt transformation**
